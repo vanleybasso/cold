@@ -1,0 +1,242 @@
+{
+  "veiculos": [
+    {
+      "id": "VLC-1023",
+      "modelo": "Mercedes Sprinter",
+      "motorista": "Carlos Silva",
+      "rota": "Centro - Zona Sul",
+      "temperatura": 3.2,
+      "status": "Normal",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:25:00",
+      "velocidade": 62,
+      "combustivel": 78,
+      "capacidade": 1500,
+      "observacoes": "Veículo em perfeito estado",
+      "historico_temperatura": [
+        { "hora": "14:20", "temperatura": 3.1, "status": "Normal", "localizacao": "Av. Paulista, 1000" },
+        { "hora": "14:10", "temperatura": 3.0, "status": "Normal", "localizacao": "Rua Augusta, 500" },
+        { "hora": "14:00", "temperatura": 3.3, "status": "Normal", "localizacao": "Praça da República" },
+        { "hora": "13:50", "temperatura": 3.5, "status": "Normal", "localizacao": "Av. São João, 300" },
+        { "hora": "13:40", "temperatura": 3.2, "status": "Normal", "localizacao": "Rua 25 de Março" }
+      ],
+      "alertas": []
+    },
+    {
+      "id": "VLC-2087",
+      "modelo": "Volkswagen Delivery",
+      "motorista": "Ana Santos",
+      "rota": "Zona Norte - Centro",
+      "temperatura": 8.1,
+      "status": "Crítico",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:15:00",
+      "velocidade": 45,
+      "combustivel": 35,
+      "capacidade": 1200,
+      "observacoes": "Problema no sistema de refrigeração",
+      "historico_temperatura": [
+        { "hora": "14:10", "temperatura": 7.8, "status": "Atenção", "localizacao": "Av. Tiradentes, 2000" },
+        { "hora": "14:00", "temperatura": 6.5, "status": "Atenção", "localizacao": "Av. Braz Leme, 1500" },
+        { "hora": "13:50", "temperatura": 5.2, "status": "Normal", "localizacao": "Rua Voluntários da Pátria" },
+        { "hora": "13:40", "temperatura": 4.0, "status": "Normal", "localizacao": "Av. Zaki Narchi, 800" },
+        { "hora": "13:30", "temperatura": 3.8, "status": "Normal", "localizacao": "Parque da Juventude" }
+      ],
+      "alertas": [
+        {
+          "data": "2023-09-10T14:15:00",
+          "tipo": "Temperatura",
+          "descricao": "Temperatura crítica: 8.1°C",
+          "prioridade": "Crítico",
+          "status": "Ativo"
+        }
+      ]
+    },
+    {
+      "id": "VLC-3054",
+      "modelo": "Ford Transit",
+      "motorista": "Roberto Alves",
+      "rota": "Zona Oeste - Aeroporto",
+      "temperatura": 6.3,
+      "status": "Atenção",
+      "status_veiculo": "Manutenção",
+      "ultima_atualizacao": "2023-09-10T14:30:00",
+      "velocidade": 78,
+      "combustivel": 62,
+      "capacidade": 1300,
+      "observacoes": "Em manutenção preventiva",
+      "historico_temperatura": [
+        { "hora": "14:20", "temperatura": 6.0, "status": "Atenção", "localizacao": "Av. Raimundo Pereira de Magalhães" },
+        { "hora": "14:10", "temperatura": 5.8, "status": "Atenção", "localizacao": "Rua da Passagem, 200" },
+        { "hora": "14:00", "temperatura": 5.5, "status": "Normal", "localizacao": "Av. Nova Paulista" },
+        { "hora": "13:50", "temperatura": 4.2, "status": "Normal", "localizacao": "Av. Francisco Matarazzo" },
+        { "hora": "13:40", "temperatura": 3.9, "status": "Normal", "localizacao": "Shopping Villa Lobos" }
+      ],
+      "alertas": [
+        {
+          "data": "2023-09-10T14:20:00",
+          "tipo": "Temperatura",
+          "descricao": "Temperatura elevada: 6.3°C",
+          "prioridade": "Alta",
+          "status": "Ativo"
+        }
+      ]
+    },
+    {
+      "id": "VLC-4098",
+      "modelo": "Fiat Ducato",
+      "motorista": "Maria Oliveira",
+      "rota": "Zona Leste - Centro",
+      "temperatura": 4.0,
+      "status": "Normal",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:18:00",
+      "velocidade": 55,
+      "combustivel": 45,
+      "capacidade": 1100,
+      "observacoes": "Desempenho dentro do esperado",
+      "historico_temperatura": [
+        { "hora": "14:10", "temperatura": 3.9, "status": "Normal", "localizacao": "Av. Sapopemba, 3000" },
+        { "hora": "14:00", "temperatura": 3.8, "status": "Normal", "localizacao": "Rua Siqueira Bueno, 500" },
+        { "hora": "13:50", "temperatura": 3.7, "status": "Normal", "localizacao": "Av. Salim Farah Maluf" },
+        { "hora": "13:40", "temperatura": 3.6, "status": "Normal", "localizacao": "Parque do Carmo" },
+        { "hora": "13:30", "temperatura": 3.8, "status": "Normal", "localizacao": "Av. República do Líbano" }
+      ],
+      "alertas": []
+    },
+    {
+      "id": "VLC-5021",
+      "modelo": "Renault Master",
+      "motorista": "João Costa",
+      "rota": "Aeroporto - Zona Sul",
+      "temperatura": 1.2,
+      "status": "Atenção",
+      "status_veiculo": "Inativo",
+      "ultima_atualizacao": "2023-09-10T14:25:00",
+      "velocidade": 0,
+      "combustivel": 28,
+      "capacidade": 1400,
+      "observacoes": "Veículo parado no aeroporto",
+      "historico_temperatura": [
+        { "hora": "14:15", "temperatura": 2.9, "status": "Normal", "localizacao": "Av. das Nações Unidas" },
+        { "hora": "14:05", "temperatura": 3.0, "status": "Normal", "localizacao": "Av. Brigadeiro Faria Lima" },
+        { "hora": "13:55", "temperatura": 3.1, "status": "Normal", "localizacao": "Av. Cidade Jardim" },
+        { "hora": "13:45", "temperatura": 3.0, "status": "Normal", "localizacao": "Marginal Pinheiros" },
+        { "hora": "13:35", "temperatura": 2.9, "status": "Normal", "localizacao": "Aeroporto de Congonhas" }
+      ],
+      "alertas": [
+        {
+          "data": "2023-09-10T14:18:00",
+          "tipo": "Temperatura",
+          "descricao": "Temperatura baixa: 1.2°C",
+          "prioridade": "Média",
+          "status": "Ativo"
+        }
+      ]
+    },
+    {
+      "id": "VLC-6159",
+      "modelo": "Iveco Daily",
+      "motorista": "Pedro Mendes",
+      "rota": "Centro - Zona Leste",
+      "temperatura": 2.8,
+      "status": "Normal",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:22:00",
+      "velocidade": 58,
+      "combustivel": 65,
+      "capacidade": 1600,
+      "observacoes": "Veículo novo em operação",
+      "historico_temperatura": [
+        { "hora": "14:12", "temperatura": 2.9, "status": "Normal", "localizacao": "Rua do Carmo, 45" },
+        { "hora": "14:02", "temperatura": 2.7, "status": "Normal", "localizacao": "Praça da Sé" },
+        { "hora": "13:52", "temperatura": 2.8, "status": "Normal", "localizacao": "Viaduto do Chá" },
+        { "hora": "13:42", "temperatura": 2.9, "status": "Normal", "localizacao": "Av. do Estado" },
+        { "hora": "13:32", "temperatura": 2.8, "status": "Normal", "localizacao": "Av. Celso Garcia" }
+      ],
+      "alertas": []
+    },
+    {
+      "id": "VLC-7241",
+      "modelo": "Volkswagen Constellation",
+      "motorista": "Fernanda Lima",
+      "rota": "Zona Sul - Centro",
+      "temperatura": 7.5,
+      "status": "Crítico",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:28:00",
+      "velocidade": 42,
+      "combustivel": 38,
+      "capacidade": 1800,
+      "observacoes": "Problema no compressor",
+      "historico_temperatura": [
+        { "hora": "14:18", "temperatura": 7.2, "status": "Crítico", "localizacao": "Av. Jabaquara, 1500" },
+        { "hora": "14:08", "temperatura": 6.8, "status": "Atenção", "localizacao": "Av. dos Bandeirantes" },
+        { "hora": "13:58", "temperatura": 5.5, "status": "Atenção", "localizacao": "Av. Roberto Marinho" },
+        { "hora": "13:48", "temperatura": 4.8, "status": "Normal", "localizacao": "Av. Interlagos" },
+        { "hora": "13:38", "temperatura": 3.9, "status": "Normal", "localizacao": "Av. Washington Luís" }
+      ],
+      "alertas": [
+        {
+          "data": "2023-09-10T14:18:00",
+          "tipo": "Temperatura",
+          "descricao": "Temperatura crítica: 7.5°C",
+          "prioridade": "Crítico",
+          "status": "Ativo"
+        }
+      ]
+    },
+    {
+      "id": "VLC-8367",
+      "modelo": "Mercedes-Benz Accelo",
+      "motorista": "Ricardo Oliveira",
+      "rota": "Zona Oeste - Centro",
+      "temperatura": 3.5,
+      "status": "Normal",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:19:00",
+      "velocidade": 61,
+      "combustivel": 72,
+      "capacidade": 1250,
+      "observacoes": "Desempenho satisfatório",
+      "historico_temperatura": [
+        { "hora": "14:09", "temperatura": 3.4, "status": "Normal", "localizacao": "Av. Rebouças, 2000" },
+        { "hora": "13:59", "temperatura": 3.6, "status": "Normal", "localizacao": "Rua Oscar Freire" },
+        { "hora": "13:49", "temperatura": 3.5, "status": "Normal", "localizacao": "Av. Brigadeiro Luís Antônio" },
+        { "hora": "13:39", "temperatura": 3.4, "status": "Normal", "localizacao": "Rua da Consolação" },
+        { "hora": "13:29", "temperatura": 3.6, "status": "Normal", "localizacao": "Av. Paulista" }
+      ],
+      "alertas": []
+    },
+    {
+      "id": "VLC-9452",
+      "modelo": "Ford F-350",
+      "motorista": "Amanda Silva",
+      "rota": "Zona Norte - Zona Leste",
+      "temperatura": 5.8,
+      "status": "Atenção",
+      "status_veiculo": "Ativo",
+      "ultima_atualizacao": "2023-09-10T14:26:00",
+      "velocidade": 47,
+      "combustivel": 41,
+      "capacidade": 1150,
+      "observacoes": "Porta da carga não está vedando completamente",
+      "historico_temperatura": [
+        { "hora": "14:16", "temperatura": 5.6, "status": "Atenção", "localizacao": "Av. Parada Pinto, 1000" },
+        { "hora": "14:06", "temperatura": 5.3, "status": "Atenção", "localizacao": "Av. Nova Cantareira" },
+        { "hora": "13:56", "temperatura": 4.9, "status": "Normal", "localizacao": "Av. Engenheiro Caetano Álvares" },
+        { "hora": "13:46", "temperatura": 4.2, "status": "Normal", "localizacao": "Av. Água Fria" },
+        { "hora": "13:36", "temperatura": 3.8, "status": "Normal", "localizacao": "Parque Jardim Felicidade" }
+      ],
+      "alertas": [
+        {
+          "data": "2023-09-10T14:06:00",
+          "tipo": "Temperatura",
+          "descricao": "Temperatura elevada: 5.8°C",
+          "prioridade": "Alta",
+          "status": "Ativo"
+        }
+      ]
+    }
+  ]
+}
