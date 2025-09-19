@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RotaSystem - Gestão de Rotas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1E355F;
+            --secondary: #2EA7AD;
+            --accent1: #C8F66A;
+            --accent2: #EC2513;
+            --accent3: #ECDD13;
+            --accent4: #2EAD61;
+            --light: #E0E0E0;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .logo {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            max-width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+        
+        .menu li {
+            margin-bottom: 5px;
+        }
+        
+        .menu a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .menu a:hover, .menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            grid-column: 2;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .page-title h2 {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        /* Filters */
+        .filters {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        /* Actions */
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .left-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #152547;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #26868b;
+        }
+        
+        .btn-success {
+            background-color: var(--accent4);
+            color: var(--white);
+        }
+        
+        .btn-success:hover {
+            background-color: #258750;
+        }
+        
+        .btn-danger {
+            background-color: var(--accent2);
+            color: var(--white);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c81c0f;
+        }
+        
+        /* Routes List */
+        .routes-list {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+        
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .list-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .routes-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .routes-table th {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .routes-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .routes-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status.active {
+            background-color: rgba(46, 173, 97, 0.2);
+            color: var(--accent4);
+        }
+        
+        .status.inactive {
+            background-color: rgba(224, 224, 224, 0.5);
+            color: #777;
+        }
+        
+        .status.warning {
+            background-color: rgba(236, 221, 19, 0.2);
+            color: #b1a300;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-action {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .btn-action.view {
+            color: var(--primary);
+        }
+        
+        .btn-action.edit {
+            color: var(--secondary);
+        }
+        
+        .btn-action.delete {
+            color: var(--accent2);
+        }
+        
+        .btn-action:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .pagination-item {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background: var(--white);
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination-item:hover, .pagination-item.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .modal-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .modal-form .form-group.full-width {
+            grid-column: 1 / span 2;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Route Details */
+        .route-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .detail-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .detail-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 16px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .detail-value {
+            color: #333;
+        }
+        
+        .map-container {
+            grid-column: 1 / span 2;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            height: 300px;
+        }
+        
+        .map-placeholder {
+            height: 100%;
+            background-color: #eee;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Temperature Indicators */
+        .temp-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .temp-normal {
+            background-color: var(--accent4);
+        }
+        
+        .temp-warning {
+            background-color: var(--accent3);
+        }
+        
+        .temp-alert {
+            background-color: var(--accent2);
+        }
+        
+        /* Sensor Cards */
+        .sensors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .sensor-card {
+            background: #f9fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid var(--accent4);
+        }
+        
+        .sensor-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .sensor-card-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+        }
+        
+        .sensor-card-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .sensor-card-location {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                grid-column: 1;
+            }
+            
+            .modal-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-form .form-group.full-width {
+                grid-column: 1;
+            }
+            
+            .left-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .left-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .route-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                grid-column: 1;
+            }
+            
+            .sensors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="/logo.png" alt="RotaSystem Logo">
+            </div>
+            
+            <ul class="menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="veiculos.html"><i class="fas fa-truck"></i> Veículos</a></li>
+                <li><a href="rotas.html" class="active"><i class="fas fa-route"></i> Rotas</a></li>
+                <li><a href="temperaturas.html"><i class="fas fa-thermometer-half"></i> Temperaturas</a></li>
+                <li><a href="alertas.html"><i class="fas fa-exclamation-triangle"></i> Alertas</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="page-title">
+                    <h2>Gestão de Rotas</h2>
+                </div>
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Operador&background=2EA7AD&color=fff" alt="User">
+                    <span>Operador</span>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-header">
+                    <div class="filter-title">Filtros</div>
+                    <button class="btn btn-secondary btn-sm">
+                        <i class="fas fa-sync-alt"></i> Limpar Filtros
+                    </button>
+                </div>
+                
+                <form class="filter-form">
+                    <div class="form-group">
+                        <label for="search">Nome da Rota</label>
+                        <input type="text" id="search" class="form-control" placeholder="Digite o nome da rota...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" class="form-control">
+                            <option value="">Todos</option>
+                            <option value="active">Ativa</option>
+                            <option value="inactive">Inativa</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="region">Região</label>
+                        <select id="region" class="form-control">
+                            <option value="">Todas</option>
+                            <option value="centro">Centro</option>
+                            <option value="zona-norte">Zona Norte</option>
+                            <option value="zona-sul">Zona Sul</option>
+                            <option value="zona-leste">Zona Leste</option>
+                            <option value="zona-oeste">Zona Oeste</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="vehicle">Tipo de Veículo</label>
+                        <select id="vehicle" class="form-control">
+                            <option value="">Todos</option>
+                            <option value="small">Pequeno</option>
+                            <option value="medium">Médio</option>
+                            <option value="large">Grande</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Actions -->
+            <div class="actions">
+                <div class="left-actions">
+                    <button class="btn btn-primary" id="addRouteBtn">
+                        <i class="fas fa-plus"></i> Nova Rota
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-file-export"></i> Exportar
+                    </button>
+                </div>
+                <div class="right-actions">
+                    <button class="btn btn-success">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Routes List -->
+            <div class="routes-list">
+                <div class="list-header">
+                    <div class="list-title">Todas as Rotas</div>
+                    <div class="list-info">Mostrando 8 de 12 rotas</div>
+                </div>
+                
+                <table class="routes-table">
+                    <thead>
+                        <tr>
+                            <th>Nome da Rota</th>
+                            <th>Origem - Destino</th>
+                            <th>Distância</th>
+                            <th>Tempo Médio</th>
+                            <th>Veículos</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rota Centro-Sul</td>
+                            <td>Centro - Zona Sul</td>
+                            <td>18.5 km</td>
+                            <td>45 min</td>
+                            <td>5 veículos</td>
+                            <td><span class="status active">Ativa</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action view" title="Visualizar" data-route-id="1"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action edit" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-action delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rota Norte-Centro</td>
+                            <td>Zona Norte - Centro</td>
+                            <td>22.3 km</td>
+                            <td>55 min</td>
+                            <td>3 veículos</td>
+                            <td><span class="status active">Ativa</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action view" title="Visualizar" data-route-id="2"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action edit" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-action delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rota Oeste-Aeroporto</td>
+                            <td>Zona Oeste - Aeroporto</td>
+                            <td>35.7 km</td>
+                            <td>1h 15min</td>
+                            <td>2 veículos</td>
+                            <td><span class="status active">Ativa</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action view" title="Visualizar" data-route-id="3"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action edit" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-action delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rota Leste-Centro</td>
+                            <td>Zona Leste - Centro</td>
+                            <td>16.8 km</td>
+                            <td>40 min</td>
+                            <td>4 veículos</td>
+                            <td><span class="status active">Ativa</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action view" title="Visualizar" data-route-id="4"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action edit" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-action delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rota Aeroporto-Sul</td>
+                            <td>Aeroporto - Zona Sul</td>
+                            <td>28.4 km</td>
+                            <td>1h 05min</td>
+                            <td>2 veículos</td>
+                            <td><span class="status inactive">Inativa</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action view" title="Visualizar" data-route-id="5"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action edit" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-action delete" title="Excluir"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <div class="pagination-item"><i class="fas fa-chevron-left"></i></div>
+                    <div class="pagination-item active">1</div>
+                    <div class="pagination-item">2</div>
+                    <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Add Route Modal -->
+    <div class="modal" id="addRouteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Adicionar Nova Rota</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="modal-form">
+                    <div class="form-group">
+                        <label for="route-name">Nome da Rota</label>
+                        <input type="text" id="route-name" class="form-control" placeholder="Ex: Rota Centro-Sul">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="origin">Origem</label>
+                        <input type="text" id="origin" class="form-control" placeholder="Local de origem">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination">Destino</label>
+                        <input type="text" id="destination" class="form-control" placeholder="Local de destino">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="distance">Distância (km)</label>
+                        <input type="number" id="distance" class="form-control" placeholder="Ex: 18.5" step="0.1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time">Tempo Médio (minutos)</label>
+                        <input type="number" id="time" class="form-control" placeholder="Ex: 45">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="route-status">Status</label>
+                        <select id="route-status" class="form-control">
+                            <option value="active">Ativa</option>
+                            <option value="inactive">Inativa</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="route-notes">Observações</label>
+                        <textarea id="route-notes" class="form-control" rows="3" placeholder="Informações adicionais sobre a rota..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelAddRoute">Cancelar</button>
+                <button class="btn btn-primary">Salvar Rota</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Route Details Modal -->
+    <div class="modal" id="routeDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detalhes da Rota</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="route-details">
+                    <div class="detail-card">
+                        <h4>Informações da Rota</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Nome:</span>
+                            <span class="detail-value" id="detail-nome">Rota Centro-Sul</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Origem:</span>
+                            <span class="detail-value" id="detail-origem">Centro</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Destino:</span>
+                            <span class="detail-value" id="detail-destino">Zona Sul</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Distância:</span>
+                            <span class="detail-value" id="detail-distancia">18.5 km</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tempo Médio:</span>
+                            <span class="detail-value" id="detail-tempo">45 minutos</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4>Estatísticas</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Veículos na Rota:</span>
+                            <span class="detail-value" id="detail-veiculos">5</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Entregas/Dia:</span>
+                            <span class="detail-value" id="detail-entregas">28</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Consumo Médio:</span>
+                            <span class="detail-value" id="detail-consumo">7.8 km/L</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value" id="detail-status"><span class="status active">Ativa</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4>Monitoramento de Temperatura</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Temperatura Média:</span>
+                            <span class="detail-value" id="detail-temp-media"><span class="temp-indicator temp-normal"></span> 3.4°C</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value" id="detail-temp-status"><span class="status normal">Normal</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Faixa Ideal:</span>
+                            <span class="detail-value" id="detail-temp-range">2°C a 5°C</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Última Atualização:</span>
+                            <span class="detail-value" id="detail-temp-update">10/09/2023 14:25</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4>Motoristas</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Principal:</span>
+                            <span class="detail-value" id="detail-motorista-principal">Carlos Silva</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Suplentes:</span>
+                            <span class="detail-value" id="detail-motorista-suplentes">Ana Santos, Roberto Alves</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4>Horários</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Primeira Saída:</span>
+                            <span class="detail-value" id="detail-primeira-saida">06:30</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Última Saída:</span>
+                            <span class="detail-value" id="detail-ultima-saida">14:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Frequência:</span>
+                            <span class="detail-value" id="detail-frequencia">A cada 2 horas</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Nova seção: Leituras de Sensores -->
+                    <div class="detail-card" style="grid-column: 1 / span 2;">
+                        <h4>Leituras de Sensores</h4>
+                        <div id="sensors-container" class="sensors-grid">
+                            <!-- Os sensores serão inseridos aqui via JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <h4>Mapa da Rota</h4>
+                        <div class="map-placeholder">
+                            Mapa da rota seria exibido aqui
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-details">Fechar</button>
+                <button class="btn btn-primary">Editar Rota</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados de exemplo para as rotas
+        const routeData = {
+            "1": {
+                nome: "Rota Centro-Sul",
+                origem: "Centro",
+                destino: "Zona Sul",
+                distancia: "18.5 km",
+                tempo: "45 minutos",
+                veiculos: "5",
+                entregas: "28",
+                consumo: "7.8 km/L",
+                status: "active",
+                motoristaPrincipal: "Carlos Silva",
+                motoristaSuplentes: "Ana Santos, Roberto Alves",
+                primeiraSaida: "06:30",
+                ultimaSaida: "14:00",
+                frequencia: "A cada 2 horas",
+                temperatura: {
+                    media: "3.4°C",
+                    status: "normal",
+                    range: "2°C a 5°C",
+                    ultimaAtualizacao: "10/09/2023 14:25"
+                },
+                sensores: [
+                    { name: "Sensor Principal", value: "3.2°C", status: "normal", location: "Centro da carga" },
+                    { name: "Sensor da Porta", value: "3.5°C", status: "normal", location: "Perto da porta" },
+                    { name: "Sensor do Fundo", value: "2.9°C", status: "normal", location: "Fundo do veículo" },
+                    { name: "Sensor do Teto", value: "3.3°C", status: "normal", location: "Teto traseiro" }
+                ]
+            },
+            "2": {
+                nome: "Rota Norte-Centro",
+                origem: "Zona Norte",
+                destino: "Centro",
+                distancia: "22.3 km",
+                tempo: "55 minutos",
+                veiculos: "3",
+                entregas: "22",
+                consumo: "7.2 km/L",
+                status: "active",
+                motoristaPrincipal: "Ana Santos",
+                motoristaSuplentes: "João Costa, Maria Oliveira",
+                primeiraSaida: "07:00",
+                ultimaSaida: "15:00",
+                frequencia: "A cada 3 horas",
+                temperatura: {
+                    media: "8.1°C",
+                    status: "alert",
+                    range: "2°C a 5°C",
+                    ultimaAtualizacao: "10/09/2023 14:20"
+                },
+                sensores: [
+                    { name: "Sensor Principal", value: "8.1°C", status: "alert", location: "Centro da carga" },
+                    { name: "Sensor da Porta", value: "9.2°C", status: "alert", location: "Perto da porta" },
+                    { name: "Sensor do Fundo", value: "7.8°C", status: "alert", location: "Fundo do veículo" },
+                    { name: "Sensor do Teto", value: "7.5°C", status: "alert", location: "Teto traseiro" }
+                ]
+            },
+            "3": {
+                nome: "Rota Oeste-Aeroporto",
+                origem: "Zona Oeste",
+                destino: "Aeroporto",
+                distancia: "35.7 km",
+                tempo: "1h 15min",
+                veiculos: "2",
+                entregas: "15",
+                consumo: "8.1 km/L",
+                status: "active",
+                motoristaPrincipal: "Roberta Alves",
+                motoristaSuplentes: "Carlos Silva, João Costa",
+                primeiraSaida: "05:30",
+                ultimaSaida: "13:30",
+                frequencia: "A cada 4 horas",
+                temperatura: {
+                    media: "6.3°C",
+                    status: "warning",
+                    range: "2°C a 5°C",
+                    ultimaAtualizacao: "10/09/2023 14:18"
+                },
+                sensores: [
+                    { name: "Sensor Principal", value: "6.3°C", status: "warning", location: "Centro da carga" },
+                    { name: "Sensor da Porta", value: "7.1°C", status: "alert", location: "Perto da porta" },
+                    { name: "Sensor do Fundo", value: "5.8°C", status: "warning", location: "Fundo do veículo" },
+                    { name: "Sensor do Teto", value: "6.0°C", status: "warning", location: "Teto traseiro" }
+                ]
+            },
+            "4": {
+                nome: "Rota Leste-Centro",
+                origem: "Zona Leste",
+                destino: "Centro",
+                distancia: "16.8 km",
+                tempo: "40 minutos",
+                veiculos: "4",
+                entregas: "32",
+                consumo: "7.5 km/L",
+                status: "active",
+                motoristaPrincipal: "Maria Oliveira",
+                motoristaSuplentes: "Ana Santos, Roberto Alves",
+                primeiraSaida: "06:00",
+                ultimaSaida: "16:00",
+                frequencia: "A cada 2 horas",
+                temperatura: {
+                    media: "4.0°C",
+                    status: "normal",
+                    range: "2°C a 5°C",
+                    ultimaAtualizacao: "10/09/2023 14:15"
+                },
+                sensores: [
+                    { name: "Sensor Principal", value: "4.0°C", status: "normal", location: "Centro da carga" },
+                    { name: "Sensor da Porta", value: "4.3°C", status: "normal", location: "Perto da porta" },
+                    { name: "Sensor do Fundo", value: "3.7°C", status: "normal", location: "Fundo do veículo" },
+                    { name: "Sensor do Teto", value: "4.1°C", status: "normal", location: "Teto traseiro" }
+                ]
+            },
+            "5": {
+                nome: "Rota Aeroporto-Sul",
+                origem: "Aeroporto",
+                destino: "Zona Sul",
+                distancia: "28.4 km",
+                tempo: "1h 05min",
+                veiculos: "2",
+                entregas: "12",
+                consumo: "7.9 km/L",
+                status: "inactive",
+                motoristaPrincipal: "João Costa",
+                motoristaSuplentes: "Carlos Silva, Maria Oliveira",
+                primeiraSaida: "08:00",
+                ultimaSaida: "12:00",
+                frequencia: "A cada 6 horas",
+                temperatura: {
+                    media: "1.2°C",
+                    status: "warning",
+                    range: "2°C a 5°C",
+                    ultimaAtualizacao: "10/09/2023 14:10"
+                },
+                sensores: [
+                    { name: "Sensor Principal", value: "1.2°C", status: "warning", location: "Centro da carga" },
+                    { name: "Sensor da Porta", value: "1.5°C", status: "warning", location: "Perto da porta" },
+                    { name: "Sensor do Fundo", value: "0.9°C", status: "alert", location: "Fundo do veículo" },
+                    { name: "Sensor do Teto", value: "1.3°C", status: "warning", location: "Teto traseiro" }
+                ]
+            }
+        };
+
+        // Modal functionality
+        const addModal = document.getElementById('addRouteModal');
+        const detailsModal = document.getElementById('routeDetailsModal');
+        const addBtn = document.getElementById('addRouteBtn');
+        const cancelBtn = document.getElementById('cancelAddRoute');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        const closeDetailsBtn = document.querySelector('.close-details');
+        
+        // Função para abrir modal
+        const openModal = (modal) => {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+        
+        // Função para fechar modal
+        const closeModal = (modal) => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
+        
+        // Event listeners para modais
+        addBtn.addEventListener('click', () => openModal(addModal));
+        
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                closeModal(addModal);
+                closeModal(detailsModal);
+            });
+        });
+        
+        cancelBtn.addEventListener('click', () => closeModal(addModal));
+        closeDetailsBtn.addEventListener('click', () => closeModal(detailsModal));
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === addModal) closeModal(addModal);
+            if (e.target === detailsModal) closeModal(detailsModal);
+        });
+        
+        // Função para renderizar os sensores no modal
+        function renderSensors(sensors) {
+            const sensorsContainer = document.getElementById('sensors-container');
+            sensorsContainer.innerHTML = '';
+            
+            sensors.forEach(sensor => {
+                const sensorCard = document.createElement('div');
+                sensorCard.className = 'sensor-card';
+                
+                // Define a cor da borda com base no status
+                let borderColor = 'var(--accent4)'; // normal
+                if (sensor.status === 'warning') borderColor = 'var(--accent3)';
+                if (sensor.status === 'alert') borderColor = 'var(--accent2)';
+                
+                sensorCard.style.borderLeft = `4px solid ${borderColor}`;
+                
+                sensorCard.innerHTML = `
+                    <div class="sensor-card-header">
+                        <div class="sensor-card-title">${sensor.name}</div>
+                        <span class="status ${sensor.status}">${sensor.status === 'normal' ? 'Normal' : sensor.status === 'warning' ? 'Atenção' : 'Crítico'}</span>
+                    </div>
+                    <div class="sensor-card-value">${sensor.value}</div>
+                    <div class="sensor-card-location">${sensor.location}</div>
+                `;
+                
+                sensorsContainer.appendChild(sensorCard);
+            });
+        }
+        
+        // Preencher detalhes da rota
+        const populateRouteDetails = (routeId) => {
+            const route = routeData[routeId];
+            if (!route) return;
+           
+            
+            // Preencher informações da rota
+            document.getElementById('detail-nome').textContent = route.nome;
+            document.getElementById('detail-origem').textContent = route.origem;
+            document.getElementById('detail-destino').textContent = route.destino;
+            document.getElementById('detail-distancia').textContent = route.distancia;
+            document.getElementById('detail-tempo').textContent = route.tempo;
+            document.getElementById('detail-veiculos').textContent = route.veiculos;
+            document.getElementById('detail-entregas').textContent = route.entregas;
+            document.getElementById('detail-consumo').textContent = route.consumo;
+            document.getElementById('detail-motorista-principal').textContent = route.motoristaPrincipal;
+            document.getElementById('detail-motorista-suplentes').textContent = route.motoristaSuplentes;
+            document.getElementById('detail-primeira-saida').textContent = route.primeiraSaida;
+            document.getElementById('detail-ultima-saida').textContent = route.ultimaSaida;
+            document.getElementById('detail-frequencia').textContent = route.frequencia;
+            
+            // Preencher informações de temperatura
+            document.getElementById('detail-temp-media').innerHTML = `<span class="temp-indicator temp-${route.temperatura.status}"></span> ${route.temperatura.media}`;
+            document.getElementById('detail-temp-range').textContent = route.temperatura.range;
+            document.getElementById('detail-temp-update').textContent = route.temperatura.ultimaAtualizacao;
+            
+            // Atualizar status de temperatura
+            const tempStatusElement = document.getElementById('detail-temp-status');
+            tempStatusElement.innerHTML = '';
+            const tempStatusSpan = document.createElement('span');
+            tempStatusSpan.className = `status ${route.temperatura.status}`;
+            tempStatusSpan.textContent = route.temperatura.status === 'normal' ? 'Normal' : route.temperatura.status === 'warning' ? 'Atenção' : 'Crítico';
+            tempStatusElement.appendChild(tempStatusSpan);
+            
+            // Atualizar status da rota
+            const statusElement = document.getElementById('detail-status');
+            statusElement.innerHTML = '';
+            const statusSpan = document.createElement('span');
+            statusSpan.className = `status ${route.status}`;
+            statusSpan.textContent = route.status === 'active' ? 'Ativa' : 'Inativa';
+            statusElement.appendChild(statusSpan);
+            
+            // Renderizar sensores
+            renderSensors(route.sensores);
+            
+            // Atualizar título do modal
+            document.querySelector('#routeDetailsModal .modal-title').textContent = `Detalhes da Rota - ${route.nome}`;
+        };
+        
+        // Visualizar detalhes da rota
+        const viewButtons = document.querySelectorAll('.btn-action.view');
+        viewButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const routeId = this.getAttribute('data-route-id');
+                populateRouteDetails(routeId);
+                openModal(detailsModal);
+            });
+        });
+        
+        // Filter functionality
+        const filterForm = document.querySelector('.filter-form');
+        const clearFiltersBtn = document.querySelector('.btn-secondary');
+        
+        clearFiltersBtn.addEventListener('click', () => {
+            const inputs = filterForm.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.type === 'text') {
+                    input.value = '';
+                } else if (input.tagName === 'SELECT') {
+                    input.selectedIndex = 0;
+                }
+                
+            });
+
+            
+        });
+        
+        // Action buttons functionality
+        const actionButtons = document.querySelectorAll('.btn-action');
+        actionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.classList[1];
+                const routeName = this.closest('tr').querySelector('td:first-child').textContent;
+                ''
+                if (action === 'edit') {
+                    alert(`Editando rota: ${routeName}`);
+                } else if (action === 'delete') {
+                    if (confirm(`Tem certeza que deseja excluir a rota ${routeName}?`)) {
+                        alert(`Rota ${routeName} excluída com sucesso!`);
+                    }
+                    
+                }
+            });
+        });
+    </script>
+</body>
+</html>
