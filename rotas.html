@@ -1124,9 +1124,12 @@
                     { name: "Sensor Principal", value: "1.2°C", status: "warning", location: "Centro da carga" },
                     { name: "Sensor da Porta", value: "1.5°C", status: "warning", location: "Perto da porta" },
                     { name: "Sensor do Fundo", value: "0.9°C", status: "alert", location: "Fundo do veículo" },
-                    { name: "Sensor do Teto", value: "1.3°C", status: "warning", location: "Teto traseiro" }
+                    { name: "Sensor do Teto", value: "1.3°C", status: "warning", location: "Teto traseiro" },
+                    
                 ]
+                
             }
+
         };
 
         // Modal functionality
@@ -1156,7 +1159,10 @@
             btn.addEventListener('click', () => {
                 closeModal(addModal);
                 closeModal(detailsModal);
+                
             });
+            
+
         });
         
         cancelBtn.addEventListener('click', () => closeModal(addModal));
@@ -1165,6 +1171,7 @@
         window.addEventListener('click', (e) => {
             if (e.target === addModal) closeModal(addModal);
             if (e.target === detailsModal) closeModal(detailsModal);
+
         });
         
         // Função para renderizar os sensores no modal
@@ -1237,6 +1244,9 @@
             statusSpan.className = `status ${route.status}`;
             statusSpan.textContent = route.status === 'active' ? 'Ativa' : 'Inativa';
             statusElement.appendChild(statusSpan);
+
+
+            
             
             // Renderizar sensores
             renderSensors(route.sensores);
@@ -1254,6 +1264,8 @@
                 openModal(detailsModal);
             });
         });
+
+        
         
         // Filter functionality
         const filterForm = document.querySelector('.filter-form');
@@ -1266,10 +1278,10 @@
                     input.value = '';
                 } else if (input.tagName === 'SELECT') {
                     input.selectedIndex = 0;
-                }
+                }detailsModal 
                 
+        
             });
-
             
         });
         
@@ -1286,6 +1298,7 @@
                     if (confirm(`Tem certeza que deseja excluir a rota ${routeName}?`)) {
                         alert(`Rota ${routeName} excluída com sucesso!`);
                     }
+                    alert
                     
                 }
             });

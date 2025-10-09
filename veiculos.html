@@ -280,6 +280,23 @@
             background-color: #f9f9f9;
         }
         
+        /* Estilo para as placas clicáveis */
+        .placa-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .placa-link:hover {
+            background-color: rgba(30, 53, 95, 0.1);
+            text-decoration: underline;
+        }
+        
         .temp-indicator {
             display: inline-block;
             width: 10px;
@@ -622,7 +639,7 @@
     </style>
 </head>
 <body>
- <div class="container">
+    <div class="container">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
@@ -739,7 +756,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>VLC-1023</td>
+                            <td>
+                                <a href="descricao.html?placa=VLC-1023" class="placa-link">VLC-1023</a>
+                            </td>
                             <td>Mercedes Sprinter</td>
                             <td>Carlos Silva</td>
                             <td>Centro - Zona Sul</td>
@@ -786,7 +805,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>VLC-2087</td>
+                            <td>
+                                <a href="descricao.html?placa=VLC-2087" class="placa-link">VLC-2087</a>
+                            </td>
                             <td>Volkswagen Delivery</td>
                             <td>Ana Santos</td>
                             <td>Zona Norte - Centro</td>
@@ -833,7 +854,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>VLC-3054</td>
+                            <td>
+                                <a href="descricao.html?placa=VLC-3054" class="placa-link">VLC-3054</a>
+                            </td>
                             <td>Ford Transit</td>
                             <td>Roberto Alves</td>
                             <td>Zona Oeste - Aeroporto</td>
@@ -880,7 +903,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>VLC-4098</td>
+                            <td>
+                                <a href="descricao.html?placa=VLC-4098" class="placa-link">VLC-4098</a>
+                            </td>
                             <td>Fiat Ducato</td>
                             <td>Maria Oliveira</td>
                             <td>Zona Leste - Centro</td>
@@ -927,7 +952,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>VLC-5021</td>
+                            <td>
+                                <a href="descricao.html?placa=VLC-5021" class="placa-link">VLC-5021</a>
+                            </td>
                             <td>Renault Master</td>
                             <td>João Costa</td>
                             <td>Aeroporto - Zona Sul</td>
@@ -1058,165 +1085,105 @@
         </div>
     </div>
 
- <!-- Vehicle Details Modal -->
-<div class="modal" id="vehicleDetailsModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">Detalhes do Veículo</h3>
-            <button class="close-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="vehicle-details">
-                <div class="detail-card">
-                    <h4>Informações do Veículo</h4>
-                    <div class="detail-item">
-                        <span class="detail-label">Placa:</span>
-                        <span class="detail-value" id="detail-placa">VLC-1023</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Modelo:</span>
-                        <span class="detail-value" id="detail-modelo">Mercedes Sprinter</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Ano:</span>
-                        <span class="detail-value" id="detail-ano">2022</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Capacidade:</span>
-                        <span class="detail-value" id="detail-capacidade">1500 kg</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Tipo:</span>
-                        <span class="detail-value" id="detail-tipo">Refrigerado</span>
-                    </div>
-                </div>
-                
-                <div class="detail-card">
-                    <h4>Informações da Operação</h4>
-                    <div class="detail-item">
-                        <span class="detail-label">Motorista:</span>
-                        <span class="detail-value" id="detail-motorista">Carlos Silva</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Rota:</span>
-                        <span class="detail-value" id="detail-rota">Centro - Zona Sul</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Status:</span>
-                        <span class="detail-value" id="detail-status"><span class="status normal">Ativo</span></span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Última Atualização:</span>
-                        <span class="detail-value" id="detail-atualizacao">15/06/2023 14:32</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Temperatura Média:</span>
-                        <span class="detail-value" id="detail-temperatura"><span class="temp-indicator temp-normal"></span> 3.2°C</span>
-                    </div>
-                </div>
-                
-                <div class="detail-card">
-                    <h4>Histórico de Manutenção</h4>
-                    <div class="detail-item">
-                        <span class="detail-label">Última Manutenção:</span>
-                        <span class="detail-value" id="detail-ultima-manutencao">10/05/2023</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Próxima Manutenção:</span>
-                        <span class="detail-value" id="detail-proxima-manutencao">10/08/2023</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">KM Atual:</span>
-                        <span class="detail-value" id="detail-km">45.230 km</span>
-                    </div>
-                </div>
-                
-                <div class="detail-card">
-                    <h4>Contatos</h4>
-                    <div class="detail-item">
-                        <span class="detail-label">Telefone Motorista:</span>
-                        <span class="detail-value" id="detail-telefone">(11) 98765-4321</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Email Motorista:</span>
-                        <span class="detail-value" id="detail-email">carlos.silva@email.com</span>
-                    </div>
-                </div>
-                
-                <!-- Nova seção: Sensores -->
-                <div class="detail-card" style="grid-column: 1 / span 2;">
-                    <h4>Leituras de Todos os Sensores</h4>
-                    <div class="sensors-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px;">
-                        <div class="sensor-card" style="background: #f9fafc; border-radius: 8px; padding: 15px; border-left: 4px solid var(--accent4);">
-                            <div class="sensor-card-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <div class="sensor-card-title" style="font-weight: 600; color: var(--primary);">Sensor Principal</div>
-                                <span class="status normal">Normal</span>
-                            </div>
-                            <div class="sensor-card-value" style="font-size: 20px; font-weight: 700;">3.2°C</div>
-                            <div class="sensor-card-location" style="font-size: 12px; color: #777; margin-top: 5px;">Centro da carga</div>
+    <!-- Vehicle Details Modal -->
+    <div class="modal" id="vehicleDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detalhes do Veículo</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="vehicle-details">
+                    <div class="detail-card">
+                        <h4>Informações do Veículo</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Placa:</span>
+                            <span class="detail-value" id="detail-placa">VLC-1023</span>
                         </div>
-                        
-                        <div class="sensor-card" style="background: #f9fafc; border-radius: 8px; padding: 15px; border-left: 4px solid var(--accent4);">
-                            <div class="sensor-card-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <div class="sensor-card-title" style="font-weight: 600; color: var(--primary);">Sensor da Porta</div>
-                                <span class="status normal">Normal</span>
-                            </div>
-                            <div class="sensor-card-value" style="font-size: 20px; font-weight: 700;">3.5°C</div>
-                            <div class="sensor-card-location" style="font-size: 12px; color: #777; margin-top: 5px;">Perto da porta</div>
+                        <div class="detail-item">
+                            <span class="detail-label">Modelo:</span>
+                            <span class="detail-value" id="detail-modelo">Mercedes Sprinter</span>
                         </div>
-                        
-                        <div class="sensor-card" style="background: #f9fafc; border-radius: 8px; padding: 15px; border-left: 4px solid var(--accent4);">
-                            <div class="sensor-card-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <div class="sensor-card-title" style="font-weight: 600; color: var(--primary);">Sensor do Fundo</div>
-                                <span class="status normal">Normal</span>
-                            </div>
-                            <div class="sensor-card-value" style="font-size: 20px; font-weight: 700;">2.9°C</div>
-                            <div class="sensor-card-location" style="font-size: 12px; color: #777; margin-top: 5px;">Fundo do veículo</div>
+                        <div class="detail-item">
+                            <span class="detail-label">Ano:</span>
+                            <span class="detail-value" id="detail-ano">2022</span>
                         </div>
-                        
-                        <div class="sensor-card" style="background: #f9fafc; border-radius: 8px; padding: 15px; border-left: 4px solid var(--accent4);">
-                            <div class="sensor-card-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <div class="sensor-card-title" style="font-weight: 600; color: var(--primary);">Sensor do Teto</div>
-                                <span class="status normal">Normal</span>
-                            </div>
-                            <div class="sensor-card-value" style="font-size: 20px; font-weight: 700;">3.3°C</div>
-                            <div class="sensor-card-location" style="font-size: 12px; color: #777; margin-top: 5px;">Teto traseiro</div>
+                        <div class="detail-item">
+                            <span class="detail-label">Capacidade:</span>
+                            <span class="detail-value" id="detail-capacidade">1500 kg</span>
                         </div>
-                        
-                        <div class="sensor-card" style="background: #f9fafc; border-radius: 8px; padding: 15px; border-left: 4px solid var(--accent4);">
-                            <div class="sensor-card-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <div class="sensor-card-title" style="font-weight: 600; color: var(--primary);">Sensor do Piso</div>
-                                <span class="status normal">Normal</span>
-                            </div>
-                            <div class="sensor-card-value" style="font-size: 20px; font-weight: 700;">3.1°C</div>
-                            <div class="sensor-card-location" style="font-size: 12px; color: #777; margin-top: 5px;">Piso dianteiro</div>
-                        </div>
-                        
-                        <div class="sensor-card" style="background: #f9fafc; border-radius: 8px; padding: 15px; border-left: 4px solid var(--accent4);">
-                            <div class="sensor-card-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <div class="sensor-card-title" style="font-weight: 600; color: var(--primary);">Sensor Externo</div>
-                                <span class="status normal">Normal</span>
-                            </div>
-                            <div class="sensor-card-value" style="font-size: 20px; font-weight: 700;">22.5°C</div>
-                            <div class="sensor-card-location" style="font-size: 12px; color: #777; margin-top: 5px;">Externo</div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tipo:</span>
+                            <span class="detail-value" id="detail-tipo">Refrigerado</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="temperature-chart">
-                    <h4>Variação de Temperatura (Últimas 24h)</h4>
-                    <div class="chart-placeholder">
-                        Gráfico de variação de temperatura seria exibido aqui
+                    
+                    <div class="detail-card">
+                        <h4>Informações da Operação</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Motorista:</span>
+                            <span class="detail-value" id="detail-motorista">Carlos Silva</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Rota:</span>
+                            <span class="detail-value" id="detail-rota">Centro - Zona Sul</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value" id="detail-status"><span class="status normal">Ativo</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Última Atualização:</span>
+                            <span class="detail-value" id="detail-atualizacao">15/06/2023 14:32</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Temperatura Média:</span>
+                            <span class="detail-value" id="detail-temperatura"><span class="temp-indicator temp-normal"></span> 3.2°C</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4>Histórico de Manutenção</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Última Manutenção:</span>
+                            <span class="detail-value" id="detail-ultima-manutencao">10/05/2023</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Próxima Manutenção:</span>
+                            <span class="detail-value" id="detail-proxima-manutencao">10/08/2023</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">KM Atual:</span>
+                            <span class="detail-value" id="detail-km">45.230 km</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4>Contatos</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Telefone Motorista:</span>
+                            <span class="detail-value" id="detail-telefone">(11) 98765-4321</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Email Motorista:</span>
+                            <span class="detail-value" id="detail-email">carlos.silva@email.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="temperature-chart">
+                        <h4>Variação de Temperatura (Últimas 24h)</h4>
+                        <div class="chart-placeholder">
+                            Gráfico de variação de temperatura seria exibido aqui
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary close-details">Fechar</button>
-            <button class="btn btn-primary">Editar Veículo</button>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-details">Fechar</button>
+                <button class="btn btn-primary">Editar Veículo</button>
+            </div>
         </div>
     </div>
-</div>
 
     <script>
         // Dados de exemplo para os veículos

@@ -701,8 +701,10 @@
                 <li><a href="temperaturas.html"class="active"><i class="fas fa-thermometer-half"></i> Temperaturas</a></li>
                 <li><a href="alertas.html"><i class="fas fa-exclamation-triangle"></i> Alertas</a></li>
                 <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                
             </ul>
         </aside>
+        
         
         <!-- Main Content -->
         <main class="main-content">
@@ -1296,6 +1298,9 @@
                     { name: "Sensor do Teto", value: "6.0°C", status: "warning", location: "Teto traseiro" },
                     { name: "Sensor do Piso", value: "6.5°C", status: "alert", location: "Piso dianteiro" },
                     { name: "Sensor Externo", value: "23.2°C", status: "normal", location: "Externo" }
+                    
+                    
+
                 ]
             },
             4: {
@@ -1410,6 +1415,8 @@
                 input.selectedIndex = 0;
             });
             alert('Filtros limpos com sucesso!');
+            
+            
         });
         
         // Modal de detalhes
@@ -1463,7 +1470,7 @@
                 updated: "9 minutos atrás"
             },
             4: {
-                temperature: "4.0°C",
+                temperature: "5.0°C",
                 status: "Normal",
                 range: "2°C a 5°C",
                 variation: "-0.2°C",
@@ -1592,6 +1599,9 @@
                 tempValue.classList.add('critical');
                 statusValue.classList.add('critical');
                 variationValue.classList.add('critical');
+                
+
+                
             }
             
             // Renderiza os sensores
@@ -1614,6 +1624,8 @@
                 openModal(id);
             });
         });
+
+        
         
         // Adiciona eventos para fechar o modal
         closeModalBtn.addEventListener('click', closeModal);
@@ -1628,6 +1640,7 @@
             if (e.target === modal) {
                 closeModal();
             }
+            querySelector
         });
         
         // Fecha o modal com a tecla ESC
