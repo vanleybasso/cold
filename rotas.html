@@ -598,25 +598,53 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Logo no final do sidebar */
+.logo-bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0 15px;
+}
+
+.bottom-logo {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.bottom-logo:hover {
+    opacity: 1;
+}
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="/logo.png" alt="RotaSystem Logo">
-            </div>
-            
-            <ul class="menu">
-                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="veiculos.html"><i class="fas fa-truck"></i> Veículos</a></li>
-                <li><a href="rotas.html" class="active"><i class="fas fa-route"></i> Rotas</a></li>
-                <li><a href="temperaturas.html"><i class="fas fa-thermometer-half"></i> Temperaturas</a></li>
-                <li><a href="alertas.html"><i class="fas fa-exclamation-triangle"></i> Alertas</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
-            </ul>
-        </aside>
+       <!-- Sidebar -->
+<aside class="sidebar">
+    <div class="logo">
+        <img src="/logo.png" alt="RotaSystem Logo">
+    </div>
+    
+    <ul class="menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="veiculos.html"><i class="fas fa-truck"></i> Veículos</a></li>
+        <li><a href="rotas.html" class="active"><i class="fas fa-route"></i> Rotas</a></li>
+        <li><a href="temperaturas.html"><i class="fas fa-thermometer-half"></i> Temperaturas</a></li>
+        <li><a href="alertas.html"><i class="fas fa-exclamation-triangle"></i> Alertas</a></li>
+        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+    </ul>
+    
+    <!-- Nova logo adicionada no final do sidebar -->
+    <div class="logo-bottom">
+        <img src="niju.png" alt="Niju Logo" class="bottom-logo">
+    </div>
+</aside>
         
         <!-- Main Content -->
         <main class="main-content">
